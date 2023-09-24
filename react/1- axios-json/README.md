@@ -4,12 +4,13 @@
 - `axios.get("url")`
 
 - post > veri gönderme isteği
+- `axios.post("url",data)`
 
-- put/path > veri güncelleme isteği
+- put/patch > veri güncelleme isteği
+- `axios.put("url/id",data)`
 
 - delete > veri silme isteği
-- fetch("url/id",{method:"DELETE"})
-- axios.delete("url/id")
+- `axios.delete("url/id")`
 
 # Json Server
 
