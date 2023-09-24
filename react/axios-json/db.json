@@ -1,0 +1,90 @@
+{
+  "todos": [
+    {
+      "id": "1as34",
+      "title": "Axios ile proje yap",
+      "date": "2023-04-43",
+      "isDone": false
+    },
+    {
+      "id": "112d34",
+      "title": "Axios ile proje yap",
+      "date": "2023-04-43",
+      "isDone": false
+    },
+    {
+      "id": "1123v34",
+      "title": "Axios ile proje yap",
+      "date": "2023-04-43",
+      "isDone": false
+    },
+    {
+      "id": "1123b34",
+      "title": "Axios ile proje yap",
+      "date": "2023-04-43",
+      "isDone": false
+    },
+    {
+      "id": "11b34",
+      "title": "Axios ile proje yap",
+      "date": "2023-04-43",
+      "isDone": false
+    },
+    {
+      "id": "1123a34",
+      "title": "Axios ile proje yap",
+      "date": "2023-04-43",
+      "isDone": false
+    },
+    {
+      "id": "112s34",
+      "title": "Axios ile proje yap",
+      "date": "2023-04-43",
+      "isDone": false
+    },
+    {
+      "id": "11232d34",
+      "title": "Axios ile proje yap",
+      "date": "2023-04-43",
+      "isDone": false
+    },
+    {
+      "id": "12312",
+      "title": "DENEME",
+      "date": "2023-09-23T20:55:54.147Z",
+      "isDone": false
+    },
+    {
+      "id": 1695503016728,
+      "title": "asdsad",
+      "date": "2023-09-23T21:03:36.728Z",
+      "isDone": false
+    },
+    {
+      "id": 1695503039731,
+      "title": "asdsaddas",
+      "date": "2023-09-23T21:03:59.731Z",
+      "isDone": false
+    },
+    {
+      "id": 1695503041844,
+      "title": "asdsaddasasd",
+      "date": "2023-09-23T21:04:01.844Z",
+      "isDone": false
+    }
+  ],
+  "users": [
+    {
+      "id": "11asd23234",
+      "name": "Ahmet",
+      "email": "ahmet0@gmail.com"
+    }
+  ],
+  "categories": [
+    {
+      "id": "asfksk143",
+      "title": "İş",
+      "image": "www.resim.com"
+    }
+  ]
+}
