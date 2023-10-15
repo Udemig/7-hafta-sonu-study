@@ -1,0 +1,82 @@
+@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@100;200;300;400;500;700;800;900&display=swap');
+
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+body {
+  height: 100vh;
+  overflow: hidden;
+  font-family: 'poppins';
+}
+
+#main-page {
+  height: 100vh;
+  width: 100vw;
+  display: grid;
+  place-items: center;
+}
+
+.container {
+  width: 80vw;
+  max-width: 1100px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  h1 {
+    text-align: center;
+    font-size: 35px;
+    @media (max-width: 800) {
+      font-size: 30px;
+    }
+  }
+}
+
+.upper {
+  display: flex;
+  gap: 10px;
+  margin-top: 50px;
+
+  .select {
+    flex: 1;
+    color: black;
+  }
+}
+
+.center {
+  display: flex;
+  gap: 105px;
+  margin-top: 20px;
+
+  @media (max-width: 800px) {
+    flex-direction: column;
+    gap: 10px;
+  }
+
+  textarea {
+    flex: 1;
+    min-height: 300px;
+    max-height: 500px;
+    padding: 10px;
+    padding: 10px;
+    font-family: 'poppins';
+    font-size: 20px;
+
+    &:disabled {
+      background: rgb(66, 66, 66);
+      color: rgb(198, 197, 197);
+    }
+  }
+}
+
+.loading {
+  background-image: url('./tr-loading.webp') !important;
+  background-size: cover !important;
+  background-position: center !important;
+}
+
+#translate-btn {
+  margin-top: 20px;
+}
