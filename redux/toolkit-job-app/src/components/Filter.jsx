@@ -1,4 +1,4 @@
-import React from 'react';
+import { useRef } from 'react';
 import {
   sortOptions,
   typeOptions,
@@ -15,6 +15,11 @@ import {
 
 const Filter = () => {
   const dispatch = useDispatch();
+  // jsx elemaın referansını alma
+  const searchRef = useRef(null);
+  const statusRef = useRef(null);
+  const typeRef = useRef(null);
+  const sortRef = useRef(null);
 
   const handleChange = (e) => {
     dispatch(filterBySearch(e.target.value));
@@ -23,6 +28,10 @@ const Filter = () => {
   //TODO form elemanlarını sıfırla
   const handleReset = () => {
     dispatch(clearFilters());
+    searchRef.current.value = '';
+    statusRef.current.value = 'Seçiniz';
+    typeRef.current.value = 'Seçiniz';
+    sortRef.current.value = 'Seçiniz';
   };
 
   return (
@@ -30,13 +39,18 @@ const Filter = () => {
       <h2>Filtreleme Formu</h2>
       <form>
         <div>
-          <label>Pozisyon</label>
-          <input onChange={handleChange} type="search" />
+          <label>Ara</label>
+          <input
+            ref={searchRef}
+            onChange={handleChange}
+            type="search"
+          />
         </div>
         {/* selectler */}
         <div>
           <label>Durum</label>
           <select
+            ref={statusRef}
             onChange={(e) => dispatch(filterByStatus(e.target.value))}
           >
             <option selected disabled>
@@ -50,6 +64,7 @@ const Filter = () => {
         <div>
           <label>Tür</label>
           <select
+            ref={typeRef}
             onChange={(e) => dispatch(filterByType(e.target.value))}
           >
             <option selected disabled>
@@ -63,6 +78,7 @@ const Filter = () => {
         <div>
           <label>Sırala</label>
           <select
+            ref={sortRef}
             onChange={(e) => dispatch(sortJobs(e.target.value))}
           >
             <option selected disabled>
