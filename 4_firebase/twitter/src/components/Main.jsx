@@ -1,6 +1,11 @@
 import { useEffect, useState } from 'react';
 import Form from './Form';
-import { collection, onSnapshot } from 'firebase/firestore';
+import {
+  collection,
+  onSnapshot,
+  orderBy,
+  query,
+} from 'firebase/firestore';
 import { db } from '../firebase/config';
 import Loader from './Post/Loader';
 import Post from './Post';
@@ -11,7 +16,10 @@ const Main = ({ user }) => {
 
   // atılan tweetler'i çekme
   useEffect(() => {
-    onSnapshot(tweetsCol, (snapshot) => {
+    // verileri alırken devereye gireceke ayarları belirleme
+    const options = query(tweetsCol, orderBy('createdAt', 'desc'));
+
+    onSnapshot(options, (snapshot) => {
       const tempTweets = [];
 
       snapshot.forEach((doc) =>

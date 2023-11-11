@@ -6,6 +6,7 @@ import VideoCard from '../components/VideoCard';
 import SkeletonLoading from '../components/SkeletonLoading';
 const Feed = () => {
   const { videos } = useContext(YoutubeContext);
+
   return (
     <div className="flex gap-4">
       <SideBar />

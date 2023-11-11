@@ -5,14 +5,38 @@ import {
 } from 'firebase/firestore';
 import { BsCardImage } from 'react-icons/bs';
 import { toast } from 'react-toastify';
-import { db } from '../firebase/config';
+import { db, storage } from '../firebase/config';
+import { ref, uploadBytes, getDownloadURL } from 'firebase/storage';
+import { v4 } from 'uuid';
+import { useState } from 'react';
+import Spinner from './Spinner';
 
 const Form = ({ user }) => {
+  const [isLoading, setIsLoading] = useState(false);
+
   // kolleksiyonun referansını alma
   const tweetCol = collection(db, 'tweets');
 
+  // resmi storage'a yükler ve url'ini döndürür
+  const uploadImage = async (file) => {
+    if (!file) {
+      return null;
+    }
+
+    // dosyayı yükleyeceğimiz konumun referansını alma
+    const fileRef = ref(storage, file.name.concat(v4()));
+
+    // referansını aldığımız konuma dosayayı yükle
+    return await uploadBytes(fileRef, file)
+      // başarılı oldu
+      .then((res) => getDownloadURL(res.ref));
+  };
+
+  // formun gönderilmesi
   const handleSubmit = async (e) => {
     e.preventDefault();
+    setIsLoading(true);
+
     // formdaki verilere erişme
     const textContent = e.target[0].value;
     const imageContent = e.target[1].files[0];
@@ -22,10 +46,13 @@ const Form = ({ user }) => {
       return toast.info('Lütfen tweet içeriği ekleyin..');
     }
 
+    // fonksiyonu stoage yükler ve urlini alır
+    const imageURL = await uploadImage(imageContent);
+
     // kolleksiyona tweet'i kaydet
     await addDoc(tweetCol, {
       textContent,
-      imageContent: null,
+      imageContent: imageURL,
       createdAt: serverTimestamp(),
       user: {
         id: user.uid,
@@ -35,6 +62,8 @@ const Form = ({ user }) => {
       likes: [],
       isEdited: false,
     });
+
+    setIsLoading(false);
   };
 
   return (
@@ -65,8 +94,11 @@ const Form = ({ user }) => {
           </label>
           <input className="hidden" id="image" type="file" />
 
-          <button className="bg-blue-600 flex items-center px-4 py-2 rounded-full transition hover:bg-blue-800">
-            Tweetle
+          <button
+            disabled={isLoading}
+            className="bg-blue-600 flex items-center justify-center px-4 py-2 min-w-[85px] min-h-[40px] rounded-full transition hover:bg-blue-800"
+          >
+            {isLoading ? <Spinner /> : 'Tweetle'}
           </button>
         </div>
       </div>

@@ -22,14 +22,12 @@ const VideoInfo = ({ id }) => {
     );
 
     setDetail(detailRes.data);
-    setChannel(channelRes.data);
+    setChannel(channelRes.data.meta);
   };
 
   useEffect(() => {
     getInfos();
   }, []);
-
-  console.log(detail);
 
   if (!detail || !channel) return <Loading />;
 
@@ -41,7 +39,7 @@ const VideoInfo = ({ id }) => {
         <div className="flex items-center gap-4">
           <img
             className="rounded-full w-12 h-12"
-            src={channel.avatar[0].url}
+            src={channel?.avatar[0]?.url}
           />
           <div>
             <h4 className="font-bold">{channel.title}</h4>
