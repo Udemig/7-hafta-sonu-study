@@ -10,11 +10,6 @@ function App() {
   const dispatch = useDispatch();
 
   useEffect(() => {
-    // axios
-    //   .get('http://localhost:4000/todos')
-    //   // api'den cevap geldiğinde reducer'a gönderme
-    //   .then((res) => dispatch(setTodos(res.data)));
-
     axios
       .get(
         'https://demo.sylius.com/api/v2/admin/product-variants?page=1&itemsPerPage=30',

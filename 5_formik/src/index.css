@@ -1,16 +1,4 @@
-:root {
-  font-family: Inter, system-ui, Avenir, Helvetica, Arial, sans-serif;
-  line-height: 1.5;
-  font-weight: 400;
-
-  color-scheme: light dark;
-
-  font-synthesis: none;
-  text-rendering: optimizeLegibility;
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
-  -webkit-text-size-adjust: 100%;
-}
+@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@100;200;300;400;500;600;700;800;900&display=swap');
 
 a {
   font-weight: 500;
@@ -25,12 +13,9 @@ body {
   margin: 0;
   color: rgba(255, 255, 255, 0.87);
   background-color: #242424;
+  overflow-x: hidden;
+  font-family: 'poppins';
   min-height: 100vh;
-}
-
-h1 {
-  font-size: 3.2em;
-  line-height: 1.1;
 }
 
 button {
@@ -82,10 +67,85 @@ form div {
   position: relative;
 }
 
+form div span {
+  position: absolute;
+  color: rgb(193, 1, 1);
+  bottom: -30px;
+  left: 0;
+}
+
 form input {
   width: 100%;
   padding: 10px;
   border-radius: 4px;
   margin-top: 5px;
   border: none;
+}
+
+.active {
+  color: #787eee;
+  text-shadow: 0 0 15px #535bf2;
+}
+
+.up {
+  color: greenyellow !important;
+}
+.down {
+  color: red !important;
+}
+
+.coin-card {
+  transition: all 0.3s;
+}
+
+.coin-card:hover {
+  box-shadow: 0 0 30px gray;
+  transform: translate(10px, -10px);
+}
+
+/* hazır kod */
+.button {
+  height: 45px;
+  width: 200px;
+  position: relative;
+  background-color: transparent;
+  cursor: pointer;
+  border: 2px solid #252525;
+  overflow: hidden;
+  background: #ffffff;
+  border-radius: 30px;
+  color: #333;
+  transition: all 0.5s ease-in-out;
+}
+
+.btn-txt {
+  z-index: 1;
+  font-weight: 800;
+  letter-spacing: 3px;
+}
+
+.type1::after {
+  content: '';
+  position: absolute;
+  left: 0;
+  top: 0;
+  transition: all 0.5s ease-in-out;
+  background-color: #333;
+  border-radius: 30px;
+  visibility: hidden;
+  height: 10px;
+  width: 10px;
+  z-index: -1;
+}
+
+.button:hover {
+  box-shadow: 1px 1px 200px #252525;
+  background: #242424;
+  color: #fff;
+  border: none;
+}
+
+.type1:hover::after {
+  visibility: visible;
+  transform: scale(100) translateX(2px);
 }

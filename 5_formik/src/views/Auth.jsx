@@ -1,5 +1,5 @@
 import { useFormik } from 'formik';
-import InputField from '../components/InputField';
+import InputField from './InputField';
 import { inputs } from '../constant';
 import { schema } from '../schema';
 
@@ -16,21 +16,26 @@ const Auth = () => {
 
     // form gönderlince çalışır
     onSubmit: (values, actions) => {
-      console.log(values);
+      localStorage.setItem('user', JSON.stringify(values));
+
+      // bütün value'ları sıfırlar
+      actions.resetForm();
     },
 
     // doğrulama şeması: todo
     validationSchema: schema,
   });
 
-  console.log(formik);
   return (
-    <div>
+    <div className="auth-page">
       <div className="container">
-        <h2 className="text-center my-5">Coinmania</h2>
+        <h2 className="d-flex gap-3 justify-content-center align-items-center text-center my-5">
+          <img height={60} src="/c-logo.png" alt="logo" />
+          <span>Coinmania</span>
+        </h2>
 
         {/* form alanı */}
-        <form>
+        <form onSubmit={formik.handleSubmit}>
           {inputs.map((data) => (
             <InputField formik={formik} data={data} />
           ))}

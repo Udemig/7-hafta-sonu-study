@@ -1,5 +1,13 @@
 import * as yup from 'yup';
 
+// 1 küçük harf
+// 1 büyük harf
+// 1 sayı
+// 1 özel karakter
+// minimum 5 karakter
+const regex =
+  '^(?=.*?[A-Z])(?=.*?[a-z])(?=.*?[0-9])(?=.*?[#?!@$%^&*-]).{5,}$';
+
 export const schema = yup.object().shape({
   // email için zorunlulukları belirleme
   email: yup
@@ -14,6 +22,14 @@ export const schema = yup.object().shape({
     .max(100, 'Yaş 100 den büyük olamaz')
     .integer('Lütfen bir tam sayı giriniz'),
 
-  //   password: '',
-  //   confirmPassword: '',
+  password: yup
+    .string()
+    .min(5, 'Şifre en az 5 karakter olmalı')
+    .matches(regex, 'Şifreniz yeterince güçlü değil')
+    .required('Şifre alanı zorunludur'),
+
+  confirmPassword: yup
+    .string() //
+    .oneOf([yup.ref('password')], 'Onay şifreniz doğru değil')
+    .required('Lütfen şifrenizi onaylayın '),
 });
