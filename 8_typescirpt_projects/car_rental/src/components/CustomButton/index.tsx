@@ -7,6 +7,7 @@ const CustomButton = ({
   btnType,
   title,
   handleClick,
+  rIcon,
 }: ButtonPropsType) => {
   return (
     <button
@@ -15,7 +16,13 @@ const CustomButton = ({
       type={btnType}
       className={`${designs} custom-btn bg-primary-blue rounded-full hover:bg-blue-800 text-white`}
     >
-      {title}
+      <span className="flex-1"> {title}</span>
+
+      {rIcon && (
+        <div className="relative w-6 h-6">
+          <img src={rIcon} />
+        </div>
+      )}
     </button>
   );
 };

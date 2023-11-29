@@ -4,22 +4,29 @@ import Hero from '../components/Hero';
 import SearchBar from '../components/SearchBar';
 import { fetchCars } from '../utils/fetchCars';
 import { CarType } from '../types';
+import Card from '../components/Card';
+import ShowMore from '../components/ShowMore';
+import { useSearchParams } from 'react-router-dom';
 
 const MainPage = () => {
+  const [params] = useSearchParams();
   // use state bizden state'de tutucağımız verinin tipini ister
   // bizde "generic" yardımıyla bir CarType dizisini state'de
   // tutucağımızı söyledik
-  const [cars, setCars] = useState<CarType[]>([]);
+  const [cars, setCars] = useState<CarType[] | null>(null);
   const [isError, setIsError] = useState<boolean>(false);
 
-  // bileşen ekrana basılınca api isteği at
+  // bileşen ekrana basılınca ve params değişince api isteği at
   useEffect(() => {
-    fetchCars()
+    // url'deki bütün parametrelei al ve obje oluştur
+    const paramsObj = Object.fromEntries(params.entries());
+
+    fetchCars(paramsObj)
       // istek başarılı olursa state'e aktar
       .then((data) => setCars(data))
       // istek başarısız olursa
       .catch(() => setIsError(true));
-  }, []);
+  }, [params]);
 
   return (
     <div>
@@ -43,23 +50,32 @@ const MainPage = () => {
           </div>
         </div>
 
-        {/* hata oluysa ekrana bas*/}
-        {isError && (
+        {/* 
+           1) Veri nullsa > henüz apiden cevap gelememiştir
+           2) IsError true ise > api'den cevabı alırken hata olmuuştur
+           3) Veri Boş diziyse > Kriterlere uygun eleman bulunamadı
+           4) Veri dolu diziyse > veri başarıyla geldi
+        */}
+        {!cars ? (
           <div className="home__error-container">
-            <h2>Üzgünüz Bir sorun oluştu</h2>
+            <h2>Yükleniyor...</h2>
           </div>
-        )}
-
-        {/* arabalar gelmediyse uyarı bas geldiyse ekrana bas */}
-        {!cars || cars.length < 1 ? (
+        ) : isError ? (
+          <div className="home__error-container">
+            <h2>Üzgünüz. Verileri alırken bir hata oluştu.</h2>
+          </div>
+        ) : cars.length < 1 ? (
           <div className="home__error-container">
             <h2>Aradığınız kriterlere uygun araba bulunamadı</h2>
           </div>
         ) : (
           <section>
             <div className="home__cars-wrapper">
-              {cars.map((car) => car.make)}
+              {cars.map((car, i) => (
+                <Card key={i} car={car} />
+              ))}
             </div>
+            <ShowMore />
           </section>
         )}
       </div>
