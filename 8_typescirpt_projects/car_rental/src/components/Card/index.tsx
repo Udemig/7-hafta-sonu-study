@@ -3,6 +3,7 @@ import { CarType } from '../../types';
 import CustomButton from '../CustomButton';
 import DetailModal from './DetailModal';
 import { generateImage } from '../../utils/generateImage';
+import { motion } from 'framer-motion';
 
 interface ICardProps {
   car: CarType;
@@ -12,7 +13,11 @@ const Card = ({ car }: ICardProps) => {
   const [isModalOpen, setIsModalOpen] = useState<boolean>(false);
 
   return (
-    <div className="car-card group">
+    <motion.div
+      initial={{ scale: 0.5, opacity: 0 }}
+      whileInView={{ scale: 1, opacity: 1 }}
+      className="car-card group"
+    >
       {/* araba ismi */}
       <h2 className="car-card__content-title">
         {car.make} {car.model}
@@ -69,7 +74,7 @@ const Card = ({ car }: ICardProps) => {
         isOpen={isModalOpen}
         close={() => setIsModalOpen(false)}
       />
-    </div>
+    </motion.div>
   );
 };
 

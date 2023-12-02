@@ -1,4 +1,5 @@
 import CustomButton from '../CustomButton';
+import { motion } from 'framer-motion';
 
 const Hero = () => {
   // TODO
@@ -24,7 +25,25 @@ const Hero = () => {
         />
       </div>
       <div className="flex justify-center">
-        <img className="object-contain" src="/hero.png" />
+        {/*
+         resim yüklendiği anda devreye girecek
+         animasyonu  belirledik
+        */}
+        <motion.img
+          initial={{
+            translateX: 200,
+            scale: 0.7,
+          }}
+          animate={{
+            translateX: 0,
+            scale: 1,
+          }}
+          transition={{
+            duration: 1,
+          }}
+          className="object-contain"
+          src="/hero.png"
+        />
       </div>
     </div>
   );

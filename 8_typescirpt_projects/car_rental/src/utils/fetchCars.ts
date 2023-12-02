@@ -27,11 +27,11 @@ export async function fetchCars(
     model = 'm3',
     limit = '5',
     year = '',
-    fuel = '',
+    fuel_type = '',
   } = filters;
 
   const res = await fetch(
-    `https://cars-by-api-ninjas.p.rapidapi.com/v1/cars?make=${make}&model=${model}&limit=${limit}&year=${year}&fuel=${fuel}`,
+    `https://cars-by-api-ninjas.p.rapidapi.com/v1/cars?make=${make}&model=${model}&limit=${limit}&year=${year}&fuel_type=${fuel_type}`,
     options
   );
 

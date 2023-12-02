@@ -39,6 +39,6 @@ export type filterType = {
   make?: string;
   model?: string;
   limit?: string;
-  fuel?: string;
+  fuel_type?: string;
   year?: string;
 };
