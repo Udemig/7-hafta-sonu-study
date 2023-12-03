@@ -5,7 +5,10 @@ export type CreateNoteProps = {
   onSubmit: (data: NoteData) => void;
   createTag: (tag: Tag) => void;
   availableTags: Tag[];
-};
+} & Partial<NoteData>;
+// Partials sayesinde miras aldığımız
+// bütün verileri zorunlu olması yerine
+// opsiyonel yaptık(? ile tanımlayarak miras alır)
 
 const CreateNote = ({
   onSubmit,

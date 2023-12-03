@@ -10,10 +10,13 @@ const NoteForm = ({
   onSubmit,
   availableTags,
   createTag,
+  markdown = '',
+  tags = [],
+  title = '',
 }: CreateNoteProps) => {
   const titleRef = useRef<HTMLInputElement>(null);
   const markdownRef = useRef<HTMLTextAreaElement>(null);
-  const [selectedTags, setSelectedTags] = useState<Tag[]>([]);
+  const [selectedTags, setSelectedTags] = useState<Tag[]>(tags);
 
   const navigate = useNavigate();
 
@@ -27,6 +30,9 @@ const NoteForm = ({
       markdown: markdownRef.current!.value,
       tags: selectedTags,
     });
+
+    // önceki sayfaya yönlendir
+    navigate(-1);
   };
 
   return (
@@ -38,6 +44,7 @@ const NoteForm = ({
             <Form.Group>
               <Form.Label>Başlık</Form.Label>
               <Form.Control
+                defaultValue={title}
                 ref={titleRef}
                 required
                 className="shadow"
@@ -64,6 +71,8 @@ const NoteForm = ({
                   // state'i güncelle
                   setSelectedTags([...selectedTags, newTag]);
                 }}
+                // daha önce oluşturlanları liste
+                options={availableTags}
                 className="shadow"
                 isMulti
               />
@@ -75,6 +84,7 @@ const NoteForm = ({
         <Form.Group className="mt-4">
           <Form.Label>İçerik</Form.Label>
           <Form.Control
+            defaultValue={markdown}
             ref={markdownRef}
             as={'textarea'}
             className="shadow"
